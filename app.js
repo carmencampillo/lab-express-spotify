@@ -10,6 +10,8 @@ app.set("view engine", "ejs");
 // npm i express spotify-web-api-node dotenv ejs express-ejs-layouts
 app.set("views", __dirname + "/views");
 app.use(express.static(__dirname + "/public"));
+const SpotifyWebApi = require('spotify-web-api-node');
+
 
 // setting the spotify-api goes here:
 const spotifyApi = new SpotifyWebApi({
@@ -30,6 +32,13 @@ app.get("/", (req, res) => {
 //geting info about the artist
 app.get('/artist-search', (req, res)=> {
     console.log ("it works", req.query) //refers to research object
+    spotifyApi
+    .searchArtists(req.query.artist)
+    .then (data => {
+        console.log('the recived data from the API: ', data.body.artist.items[0].images);
+    //what we want to do after recived the data from the API
+    const restultFromApi = data.body.artists.items
+    res.render('artist-search-results',{restultFromApi})
 })
 
 app.listen(3000, () =>
