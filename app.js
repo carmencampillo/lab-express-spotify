@@ -39,7 +39,7 @@ app.get('/artist-search', (req, res)=> {
     //what we want to do after recived the data from the API
     const restultFromApi = data.body.artists.items
     res.render('artist-search-results',{restultFromApi})
-})
+})})
 
 app.listen(3000, () =>
   console.log("My Spotify project running on port 3000 🎧 🥁 🎸 🔊")
